@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>System Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00; /* Hacker Green */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px; /* Slightly smaller for mobile screens */
+            margin: 0;
+            padding: 10px;
+            overflow-x: hidden;
+            height: 100vh; /* Ensures the whole screen is clickable */
+            user-select: none; /* Prevents accidentally highlighting text while tapping */
+        }
+        #console {
+            white-space: pre-wrap;
+            word-wrap: break-word; /* Prevents long code from pushing off the screen */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="console"></div>
+
+    <script>
+        const fakeCode = `
+def bypass_mainframe(target_ip):
+    print("Initiating brute force protocol...")
+    connect_to_node(target_ip)
+    
+    for i in range(10000):
+        if check_encryption_key(generate_hash(i)):
+            print("Access Granted. Bypassing firewall.")
+            return True
+            
+    sys.exit("Error: Counter-measure detected.")
+
+class RootAccess:
+    def __init__(self):
+        self.privilege_level = "SUPERUSER"
+        self.packet_sniffer = True
+        
+    def execute_payload(self):
+        inject_sql_string("DROP TABLE users;")
+        reroute_ip_address("192.168.1.1")
+        print("Data exfiltration complete.")
+        
+# Initiating sequence...
+import os, sys, time
+def crack_password():
+    chars = "abcdefghijklmnopqrstuvwxyz0123456789@#%"
+    for c in chars:
+        sys.stdout.write(f"Testing node: {c}\\r")
+        time.sleep(0.01)
+crack_password()
+`;
+
+        let currentIndex = 0;
+        const consoleDiv = document.getElementById('console');
+
+        // Function to add code to the screen
+        function typeCode() {
+            // Grab 25 characters per tap for a fast, dramatic effect
+            let textToAdd = fakeCode.substring(currentIndex, currentIndex + 25);
+            
+            consoleDiv.innerHTML += textToAdd;
+            currentIndex += 25;
+
+            // Loop back to the start if we run out of code
+            if (currentIndex >= fakeCode.length) {
+                currentIndex = 0;
+            }
+
+            // Auto-scroll to the bottom
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // Listen for taps (mobile) and clicks (desktop/mouse)
+        window.addEventListener('touchstart', function(event) {
+            event.preventDefault(); // Prevents zooming or scrolling issues
+            typeCode();
+        }, {passive: false});
+
+        window.addEventListener('click', function(event) {
+            typeCode();
+        });
+        
+        // Keep the keyboard functionality just in case!
+        window.addEventListener('keydown', function(event) {
+            event.preventDefault(); 
+            typeCode();
+        });
+    </script>
+</body>
+</html>
